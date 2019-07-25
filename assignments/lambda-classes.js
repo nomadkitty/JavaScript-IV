@@ -23,6 +23,9 @@ class Instructor extends Person {
     grade(student, subject){
         console.log(`${student.name} receives a perfect score on ${subject}.`);
     }
+    subtract(student, max){
+        console.log(`${student.grade}` - Math.floor(Math.random()*Math.floor(max)))
+    }
 }
 
 class Student extends Person {
@@ -31,6 +34,7 @@ class Student extends Person {
         this.previousBackground = studentAttrs.previousBackground;
         this.className = studentAttrs.className;
         this.favSubjects = studentAttrs.favSubjects;
+        this.grade = studentAttrs.grade;
     }
     listsSubjects(){
         this.favSubjects.forEach(items => {
@@ -42,6 +46,13 @@ class Student extends Person {
     }
     sprintChallenge(SCSubject){
         console.log(`${this.name} has begun sprint challenge on ${SCSubject}.`)
+    }
+    graduate(){
+        if (this.grade > 70){
+            console.log('Congratulations! You can graduate!');
+        } else {
+            console.log('Sorry, you need to work on your assignment!')
+        }
     }
 }
 
@@ -56,6 +67,9 @@ class ProjectManager extends Instructor {
     }
     debugsCode(student, subject){
         console.log(`${this.name} debugs ${student.name}'s code on ${subject}.`)
+    }
+    subtract(student, max){
+        console.log(`${student.grade}` - Math.floor(Math.random()*Math.floor(max)))
     }
 }
 
@@ -83,7 +97,8 @@ const mandy = new Student({
     age: 28,
     previousBackground: 'Accountant',
     className: 'Web22',
-    favSubjects: ['HTML','CSS', 'JavaScript']
+    favSubjects: ['HTML','CSS', 'JavaScript'],
+    grade: 88
 })
 
 const jack = new Student({
@@ -92,7 +107,8 @@ const jack = new Student({
     age: 23,
     previousBackground: 'Diamond dealer',
     className: 'DS4',
-    favSubjects: ['Data Storytelling','Liner Algebra', 'Tree Ensembles']
+    favSubjects: ['Data Storytelling','Liner Algebra', 'Tree Ensembles'],
+    grade: 72
 })
 
 const ada = new ProjectManager({
@@ -124,4 +140,7 @@ jack.sprintChallenge('Applied Modeling');
 console.log(ada.gradClassName);
 ada.standUP('Web23');
 console.log(mike.favInstructor);
-mike.debugsCode(ada, 'Statistical Tests')
+mike.debugsCode(ada, 'Statistical Tests');
+brit.subtract(jack, 10);
+ada.subtract(mandy, 12);
+mandy.graduate();
